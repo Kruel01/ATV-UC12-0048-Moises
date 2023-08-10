@@ -57,7 +57,7 @@ namespace ATV_UC12_0048_Moises
 
         private void TxtSalario_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(TxtSalario.Text, out double n) == false)
+            if (decimal.TryParse(TxtSalario.Text, out decimal n) == false)
             {
                 TxtSalario.Clear();
 
@@ -100,8 +100,16 @@ namespace ATV_UC12_0048_Moises
                         }
                         else 
                         {
-                            Cliente Clientes = new Cliente(Convert.ToInt32(TxtID.Text), TxtNome.Text, Convert.ToInt32(TxtCPF.Text), Convert.ToDateTime(DTNascimento.Text), Convert.ToDouble(TxtSalario.Text));
+                           Cliente cliente = new Cliente(Convert.ToInt32(TxtCPF.Text));
+                            cliente.ClienteNome = TxtNome.Text;
+                           
                             
+                            cliente.ClienteSalario = Convert.ToDecimal(TxtSalario.Text);
+
+                           
+                            MessageBox.Show(cliente.VerificarSeCorrentistaMaior(Convert.ToDateTime(DTNascimento.Text)).ToString());
+
+
                         }
                     
                     }
