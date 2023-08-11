@@ -20,16 +20,20 @@ namespace ATV_UC12_0048_Moises.Classes
 
         public Cliente() 
         {
-           
+            
         }
 
         public Cliente(int CPF)
         {
             this.CPF = CPF;
+            this.ClientId = ClientId;
+            this.ClienteSalario = ClienteSalario;
+            this.ClienteDataNascimento = ClienteDataNascimento;
+            this.ClienteNome = ClienteNome;
             IdClientes++;
-           
-            
-        
+
+
+
         }
         public Cliente(int Clienteid, string Clientenome, int ClienteCPF, DateTime Nascimento, decimal Clientesalario)
                   
@@ -40,14 +44,32 @@ namespace ATV_UC12_0048_Moises.Classes
             this.ClienteDataNascimento = Nascimento;
             this.ClienteSalario = Clientesalario;
             
+
         }    
-        public int VerificarSeCorrentistaMaior(DateTime Nascimento) 
+        public bool VerificarSeCorrentistaMaior() 
         {
             var today = DateTime.Today;
-            var age = Nascimento.Year - today.Year;
+            var age = this.ClienteDataNascimento.Year - today.Year;
 
 
-            return  age;
+            if (today.Month < this.ClienteDataNascimento.Month || (today.Month == this.ClienteDataNascimento.Month && today.Day < this.ClienteDataNascimento.Day))
+            {
+                age = age - 1;            
+            }
+            {
+
+
+                if(age >= 18) 
+                {
+                    return true;
+                
+                }
+                else 
+                {
+                return false;
+                
+                }
+            }
         }
         public static int GenerateId()
         {
@@ -56,6 +78,20 @@ namespace ATV_UC12_0048_Moises.Classes
 
 
         }
+       public string TipoCliente() 
+        {
+            if(this.ClienteSalario <= 2999) 
+            {
+                return "Silver";
+            }
+
+            
+        }
+
+
+
+
+        
     }   
 
 }

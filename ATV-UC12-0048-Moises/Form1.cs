@@ -1,6 +1,6 @@
 using ATV_UC12_0048_Moises.Classes;
 using System.Reflection.Metadata.Ecma335;
-
+using System.Security.Cryptography.Xml;
 
 namespace ATV_UC12_0048_Moises
 {
@@ -25,6 +25,8 @@ namespace ATV_UC12_0048_Moises
 
         private void TxtID_TextChanged(object sender, EventArgs e)
         {
+
+            
             if (int.TryParse(TxtID.Text, out int n) == false)
             {
 
@@ -100,18 +102,25 @@ namespace ATV_UC12_0048_Moises
                         }
                         else 
                         {
-                           Cliente cliente = new Cliente(Convert.ToInt32(TxtCPF.Text));
-                            cliente.ClienteNome = TxtNome.Text;
-                           
-                            
-                            cliente.ClienteSalario = Convert.ToDecimal(TxtSalario.Text);
+                     
+                                
+                                Cliente cliente = new Cliente(Convert.ToInt32(TxtCPF.Text));
+                                cliente.ClienteNome = TxtNome.Text;
+                                cliente.ClientId = Cliente.GenerateId();
+                                TxtID.Text = Cliente.GenerateId().ToString();
+                                cliente.ClienteSalario = Convert.ToDecimal(TxtSalario.Text);
+                            MessageBox.Show(cliente.VerificarSeCorrentistaMaior().ToString());
+                                
 
-                           
-                            MessageBox.Show(cliente.VerificarSeCorrentistaMaior(Convert.ToDateTime(DTNascimento.Text)).ToString());
+                            
+                                               
+
+
+
 
 
                         }
-                    
+
                     }
                 }
            
