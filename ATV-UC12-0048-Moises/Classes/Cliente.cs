@@ -13,17 +13,18 @@ namespace ATV_UC12_0048_Moises.Classes
     {
         public int ClientId { get; set; }
         public string? ClienteNome { get; set; }
-        public int CPF { get; set; }
+        public string CPF { get; set; }
         public DateTime ClienteDataNascimento { get; set; }
         public decimal ClienteSalario { get; set; }
         private static int IdClientes;
+        private static DateTime Data_Nascimento_Static;
 
         public Cliente() 
         {
             
         }
 
-        public Cliente(int CPF)
+        public Cliente(string CPF)
         {
             this.CPF = CPF;
             this.ClientId = ClientId;
@@ -35,42 +36,18 @@ namespace ATV_UC12_0048_Moises.Classes
 
 
         }
-        public Cliente(int Clienteid, string Clientenome, int ClienteCPF, DateTime Nascimento, decimal Clientesalario)
+        public Cliente(string Clientenome, string ClienteCPF, DateTime Nascimento, decimal Clientesalario)
                   
         {
             this.ClienteNome = Clientenome;
-            this.ClientId += Clienteid;
+            this.ClientId = IdClientes+1;
             this.CPF = ClienteCPF;
             this.ClienteDataNascimento = Nascimento;
             this.ClienteSalario = Clientesalario;
-            
+            IdClientes++;
 
         }    
-        public bool VerificarSeCorrentistaMaior() 
-        {
-            var today = DateTime.Today;
-            var age = this.ClienteDataNascimento.Year - today.Year;
-
-
-            if (today.Month < this.ClienteDataNascimento.Month || (today.Month == this.ClienteDataNascimento.Month && today.Day < this.ClienteDataNascimento.Day))
-            {
-                age = age - 1;            
-            }
-            {
-
-
-                if(age >= 18) 
-                {
-                    return true;
-                
-                }
-                else 
-                {
-                return false;
-                
-                }
-            }
-        }
+       
         public static int GenerateId()
         {
 
@@ -80,17 +57,67 @@ namespace ATV_UC12_0048_Moises.Classes
         }
        public string TipoCliente() 
         {
-            if(this.ClienteSalario <= 2999) 
+           
+            
+            if(this.ClienteSalario <= 3000m) 
             {
                 return "Silver";
             }
-
+            else if (this.ClienteSalario >= 3001m && this.ClienteSalario <= 5000m )
+            {
+                return "gold";
+            }
+            else if (this.ClienteSalario > 5001m && this.ClienteSalario <=10000m)
+            {
+                return "Diamond";
+            }
+            else if (this.ClienteSalario >= 10001m )
+            {
+                return "Black";
+            }
+            else 
+            {
+                return "Sem planos";
+            }
+            
             
         }
+        public string MostrarMensagemBoasVindas() 
+        {   
+            return "Olá Cliente" + this.ClienteNome + this.TipoCliente();
+            return this.ClienteNome;
+            return this.TipoCliente();
+        
+        }
+
+        public string MostrarCliente() 
+        {
 
 
 
+            return this.ClienteNome + this.TipoCliente() + this.ClienteDataNascimento + this.ClienteSalario + this.CPF + this.ClientId;
+        
+        }
+        public static bool verificarNascimento(DateTime Nascimento) 
+        {
 
+            int idade = DateTime.Today.Year - Nascimento.Year;
+            if (DateTime.Today < Nascimento.AddYears(idade))
+            {
+                idade--;
+
+            }
+            if (idade < 18)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         
     }   
 

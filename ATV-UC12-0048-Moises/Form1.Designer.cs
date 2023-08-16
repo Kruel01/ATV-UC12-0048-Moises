@@ -39,6 +39,8 @@
             LblCpf = new Label();
             LblDataNascimento = new Label();
             LblSalario = new Label();
+            BTNCorrentista2 = new Button();
+            BTNCorrentista1 = new Button();
             SuspendLayout();
             // 
             // TxtID
@@ -64,6 +66,7 @@
             TxtCPF.Size = new Size(244, 23);
             TxtCPF.TabIndex = 2;
             TxtCPF.TextChanged += TxtCPF_TextChanged;
+            TxtCPF.KeyPress += KeyPress;
             // 
             // TxtSalario
             // 
@@ -136,11 +139,33 @@
             LblSalario.TabIndex = 10;
             LblSalario.Text = "Salário";
             // 
+            // BTNCorrentista2
+            // 
+            BTNCorrentista2.Location = new Point(102, 303);
+            BTNCorrentista2.Name = "BTNCorrentista2";
+            BTNCorrentista2.Size = new Size(75, 23);
+            BTNCorrentista2.TabIndex = 11;
+            BTNCorrentista2.Text = "VER 2";
+            BTNCorrentista2.UseVisualStyleBackColor = true;
+            BTNCorrentista2.Click += BTNCorrentista2_Click;
+            // 
+            // BTNCorrentista1
+            // 
+            BTNCorrentista1.Location = new Point(353, 307);
+            BTNCorrentista1.Name = "BTNCorrentista1";
+            BTNCorrentista1.Size = new Size(75, 23);
+            BTNCorrentista1.TabIndex = 12;
+            BTNCorrentista1.Text = "VER 1";
+            BTNCorrentista1.UseVisualStyleBackColor = true;
+            BTNCorrentista1.Click += BTNCorrentista1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(560, 346);
+            Controls.Add(BTNCorrentista1);
+            Controls.Add(BTNCorrentista2);
             Controls.Add(LblSalario);
             Controls.Add(LblDataNascimento);
             Controls.Add(LblCpf);
@@ -172,5 +197,7 @@
         private Label LblCpf;
         private Label LblDataNascimento;
         private Label LblSalario;
+        private Button BTNCorrentista2;
+        private Button BTNCorrentista1;
     }
 }
